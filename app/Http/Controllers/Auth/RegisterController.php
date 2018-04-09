@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -49,9 +49,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'email' => 'required|string|email|max:255|unique:users|confirmed',
+            'password' => 'required|string|min:6|confirmed',                        
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'gender' => 'required|string|max:255',
+            'tgl_lahir' => 'required',            
+            'alamat' => 'required|string|max:255',
+            'kode_pos' => 'required|max:255',            
         ]);
     }
 
@@ -64,9 +68,18 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'organisasi' => $data['organisasi'],
+            'name' => $data['name'],
+            'gender' => $data['gender'],
+            'tgl_lahir' => $data['tgl_lahir'],
+            'no_telp' => $data['no_telp'],
+            'no_hp' => $data['no_hp'],
+            'provinsi' => $data['provinsi'],
+            'kota' => $data['kota'],
+            'alamat' => $data['alamat'],
+            'kode_pos' => $data['kode_pos'],            
         ]);
     }
 }

@@ -8,67 +8,67 @@
 
     <title>Evag Conservation - Perlengkapan Konservasi Kualitas Museum</title>
     
-    <link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
-    
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
-    
-    <link type="text/css" rel="stylesheet" href="css/slick.css" />
-    <link type="text/css" rel="stylesheet" href="css/slick-theme.css" />
-    
-    <link type="text/css" rel="stylesheet" href="css/nouislider.min.css" />
-    
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    
-    <link type="text/css" rel="stylesheet" href="css/style.css" />
-
+    <link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">    
+    <link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
+    <link type="text/css" rel="stylesheet" href="{{asset('css/slick.css')}}" />
+    <link type="text/css" rel="stylesheet" href="{{asset('css/slick-theme.css')}}" />
+    <link type="text/css" rel="stylesheet" href="{{asset('css/nouislider.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('css/style.css')}}" />
 </head>
 
 <body>    
     <header>
         <div id="header">
             <div class="container">
-                <div class="pull-left">                    
+                <div class="pull-left">
                     <div class="header-logo">
-                        <a class="logo" href="#">
-                            <img src="./img/logo.png" style="width: 155px;height: 70px;" alt="">
+                        <a class="logo" href="{{ url('/') }}">
+                            <img src="{{url('img/logo.png')}}" style="width: 155px;height: 70px;" alt="">
                         </a>
                     </div>                    
-                    
                     <div class="header-search">
-                        <form>
-                            <input class="input  search-input" type="text" placeholder="Masukkan kata kunci Anda">
-                            <button class="search-btn"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>                    
+                        <form method="POST" action="{{ route('search') }}">
+                            @csrf
+                            <input class="input search-input" type="text" placeholder="Masukkan kata kunci Anda" name="keyword" value="{{ $search or ''}}">
+                            <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+                        </form>                        
+                    </div>                
                 </div>
                 <div class="pull-right">
-                    <ul class="header-btns">                        
-                        <li class="header-account dropdown default-dropdown">
-                            <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
+                    <ul class="header-btns">
+                        @auth
+                        <li class="header-account">
+                            <a href="{{ route('profile') }}">
                                 <div class="header-btns-icon">
                                     <i class="fa fa-user-o"></i>
                                 </div>
-                                <strong class="text-uppercase">Akun saya</strong>
-                            </div>
-                            <a href="#" class="text-uppercase">Masuk</a>                            
+                                <strong class="text-uppercase">{{ Auth::user()->name }}</strong>
+                            </a>
+                            <br>
+                            <a href="{{ route('logout') }}" class="text-uppercase" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </li>
+                        @endauth
                         
                         <li class="header-cart dropdown default-dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                            <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <div class="header-btns-icon">
                                     <i class="fa fa-shopping-cart"></i>
                                     <span class="qty">0</span>
                                 </div>
-                                <strong class="text-uppercase">Keranjang saya:</strong>
+                                <strong class="text-uppercase">Keranjang saya :</strong>
                                 <br>
                                 <span>0 item - Rp0</span>
-                            </a>
+                            </div>
                             <div class="custom-menu">
                                 <div id="shopping-cart">
                                     <div class="shopping-cart-list">
                                         <div class="product product-widget">
                                             <div class="product-thumb">
-                                                <img src="./img/thumb-product01.jpg" alt="">
+                                                <img src="{{url('img/thumb-product01.jpg')}}" alt="">
                                             </div>
                                             <div class="product-body">
                                                 <h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
@@ -78,7 +78,7 @@
                                         </div>
                                         <div class="product product-widget">
                                             <div class="product-thumb">
-                                                <img src="./img/thumb-product01.jpg" alt="">
+                                                <img src="{{url('img/thumb-product01.jpg')}}" alt="">
                                             </div>
                                             <div class="product-body">
                                                 <h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
@@ -88,7 +88,7 @@
                                         </div>
                                     </div>
                                     <div class="shopping-cart-btns">
-                                        <button class="main-btn">View Cart</button>
+                                        <a href="{{ route('cart') }}" class="main-btn">View Cart</a>
                                         <button class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></button>
                                     </div>
                                 </div>
@@ -110,40 +110,52 @@
                 <div class="category-nav show-on-click">
                     <span class="category-header">Kategori <i class="fa fa-list"></i></span>
                     <ul class="category-list">
-                        <!-- foreach($categorys as $category) -->
+                        <?php
+                        $categories = \App\Category::all();                        
+                        ?>
+                        @foreach($categories as $category)
                         <li class="dropdown side-dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Category <i class="fa fa-angle-right"></i></a>
+                            <a class="dropdown-toggle {{ Request::segment(2) === $category->name ? 'active' : null }}" data-toggle="dropdown" aria-expanded="true">{{ $category->name }} <i class="fa fa-angle-right"></i></a>
                             <div class="custom-menu">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <ul class="list-links">
                                             <li>
-                                                <h3 class="list-links-title">Category</h3>
+                                                <h3 class="list-links-title"><a class="{{ Request::segment(2) === $category->name ? 'active' : null }}" href="{{ url($category->name) }}">{{ $category->name }}</a></h3>
                                             </li>
-                                            <!-- foreach($sub_categorys as $subcategory) -->
+                                            <?php
+                                            $sub_categories = \App\SubCat::where('category', '=', $category->name)->get();
+                                            ?>
+                                            @foreach($sub_categories as $sub_category)
                                             <div class="col-md-4">
                                                 <ul class="list-links">
-                                                    <li><a href="#">Sub Category</a></li>
+                                                    <li class="{{ Request::segment(3) === $sub_category->name ? 'active' : null }}"><a href="{{ url($sub_category->category.'/'.$sub_category->name) }}">{{ $sub_category->name }}</a></li>
                                                 </ul>
                                             </div>
-                                            <!-- endforeach -->
+                                            @endforeach                                            
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </li>
-                        <!-- endforeach -->
+                        @endforeach
                     </ul>
                 </div>
 
                 <div class="menu-nav">
                     <span class="menu-header">Menu <i class="fa fa-bars"></i></span>
                     <ul class="menu-list">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Akun Saya</a></li>
+                        <li><a class="{{ Request::segment(1) === null ? 'active' : null }}" href="{{ url('/') }}">Home</a></li>
+                        @auth
+                        <li><a class="{{ Request::segment(1) === 'profile' ? 'active' : null }}" href="{{ url('profile') }}">Akun Saya</a></li>
                         <li><a href="#">Riwayat Pesanan</a></li>
-                        <li><a href="#">Keranjang Saya</a></li>
-                        <li><a href="#">Checkout</a></li>                        
+                        <li><a href="{{ route('cart') }}">Keranjang Saya</a></li>
+                        <li><a href="#">Checkout</a></li>
+                        @endauth
+                        @guest
+                        <li><a class="{{ Request::segment(1) === 'login' ? 'active' : null }}" href="{{ route('login') }}">Login</a></li>
+                        <li><a class="{{ Request::segment(1) === 'register' ? 'active' : null }}" href="{{ route('register') }}">Register</a></li>                        
+                        @endguest
                     </ul>
                 </div>
             </div>
@@ -153,7 +165,7 @@
     <!-- <div id="breadcrumb">
         <div class="container">
             <ul class="breadcrumb">
-                <li><a href="#">Home</a></li>
+                <li><a href="{{ url('/') }}">Home</a></li>
                 <li class="active">Blank</li>
             </ul>
         </div>
@@ -177,7 +189,7 @@
                             <li><a href="#">Tentang Kami</a></li>
                             <li><a href="#">Hubungi Kami</a></li>
                             <li><a href="#">Kebijakan Pribadi</a></li>
-                            <li><a href="#">Syarat $ Ketentuan</a></li>
+                            <li><a href="#">Syarat & Ketentuan</a></li>
                         </ul>
                     </div>
                 </div>
@@ -186,7 +198,7 @@
                     <div class="footer">
                         <h3 class="footer-header">Akun Saya</h3>
                         <ul class="list-links">
-                            <li><a href="#">Akun Saya</a></li>
+                            <li><a class="{{ Request::segment(1) === 'profile' ? 'active' : null }}" href="{{ route('profile') }}" href="{{ route('profile') }}">Akun Saya</a></li>
                             <li><a href="#">Riwayat Pesanan</a></li>                            
                         </ul>
                     </div>
@@ -197,12 +209,12 @@
                 <div class="col-md-4">
                     <div class="footer">
                         <div class="footer-logo">
-                            <a class="logo" href="#">
-                                <img src="./img/logo.png" style="width: 155px;height: 70px;" alt="">
+                            <a class="logo" href="{{ url('/') }}">
+                                <img src="{{url('img/logo.png')}}" style="width: 155px;height: 70px;" alt="">
                             </a>
                         </div>        
 
-                        <p>Contact: sales@evagconservation.co.id</p>                        
+                        <p>Kontak: sales@evagconservation.co.id</p>                        
                     </div>
                 </div>
             </div>
@@ -217,12 +229,12 @@
         </div>
     </footer>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/slick.min.js"></script>
-    <script src="js/nouislider.min.js"></script>
-    <script src="js/jquery.zoom.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/slick.min.js')}}"></script>
+    <script src="{{asset('js/nouislider.min.js')}}"></script>
+    <script src="{{asset('js/jquery.zoom.min.js')}}"></script>
+    <script src="{{asset('js/main.js')}}"></script>
 
 </body>
 

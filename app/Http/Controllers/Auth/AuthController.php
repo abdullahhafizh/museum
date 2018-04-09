@@ -3,58 +3,46 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
-
 use Auth;
-use Socialite;
+use User;
 
 class AuthController extends Controller
 {
     /**
-     * Redirect the user to the OAuth Provider.
+     * Create a new controller instance.
      *
-     * @return Response
+     * @return void
      */
-    public function redirectToProvider($provider)
+    public function __construct()
     {
-        return Socialite::driver($provider)->redirect();
+    	$this->middleware('auth');
     }
 
-    /**
-     * Obtain the user information from provider.  Check if the user already exists in our
-     * database by looking up their provider_id in the database.
-     * If the user exists, log them in. Otherwise, create a new user then log them in. After that 
-     * redirect them to the authenticated users homepage.
-     *
-     * @return Response
-     */
-    public function handleProviderCallback($provider)
+    public function profile()
     {
-        $user = Socialite::driver($provider)->user();
-
-        $authUser = $this->findOrCreateUser($user, $provider);
-        Auth::login($authUser, true);
-        return redirect($this->redirectTo);
+    	$data['user'] =  User::find(Auth::user()->id);
+    	return view('profile')->with($data);
     }
 
-    /**
-     * If a user has registered before using social auth, return the user
-     * else, create a new user object.
-     * @param  $user Socialite user object
-     * @param $provider Social auth provider
-     * @return  User
-     */
-    public function findOrCreateUser($user, $provider)
+    public function update(Request $request)
     {
-        $authUser = User::where('provider_id', $user->id)->first();
-        if ($authUser) {
-            return $authUser;
-        }
-        return User::create([
-            'name'     => $user->name,
-            'email'    => $user->email,
-            'provider' => $provider,
-            'provider_id' => $user->id
-        ]);
+    	$user = User::find(Auth::user()->id);
+    	$user->name = $request->input('name');
+        $user->organisasi = $request->input('organisasi');
+        $user->gender = $request->input('gender');
+        $user->tgl_lahir = $request->input('tgl_lahir');
+        $user->no_telp = $request->input('no_telp');
+        $user->no_hp = $request->input('no_hp');
+        $user->provinsi = $request->input('provinsi');
+        $user->kota = $request->input('kota');
+        $user->alamat = $request->input('alamat');
+        $user->kode_pos = $request->input('kode_pos');
+    	if (!$request->input('password') == null) {    		
+    		$user->password = Hash::make($request->input('password'));
+    	}
+    	$user->save();
+    	return redirect(url('profile'))	;
     }
 }

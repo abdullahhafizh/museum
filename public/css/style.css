@@ -135,6 +135,10 @@ textarea.input {
   font-size: 16px;
 }
 
+ul.list-links>li>h3.list-links-title>a.active {
+  color: #F8694A;
+}
+
 .list-links li>a {
   position: relative;
   display: inline-block;
@@ -163,6 +167,10 @@ textarea.input {
   -webkit-transform: translateX(10px);
   -ms-transform: translateX(10px);
   transform: translateX(10px);
+}
+
+.list-links li>a.active {
+  color: #F8694A;
 }
 
 .list-links li>a:hover:before, .list-links li>a:focus:before, .list-links li.active>a:before {
@@ -433,6 +441,10 @@ textarea.input {
   color: #F8694A;
 }
 
+.category-nav .category-list>li>a.active {
+  color: #F8694A;
+}
+
 .menu-nav .menu-header {
   display: none;
   padding: 15px;
@@ -459,6 +471,10 @@ textarea.input {
 }
 
 .menu-nav .menu-list>li>a:hover, .menu-nav .menu-list>li>a:focus, .menu-nav .menu-list>li.dropdown.open>a {
+  color: #F8694A;
+}
+
+.menu-nav .menu-list>li>a.active {
   color: #F8694A;
 }
 
