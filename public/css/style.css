@@ -1,65 +1,3 @@
-/*
-Template Name: E-SHOP HTML E-Commerce Template
-Author: yaminncco
-
-Colors:
-	Body 		  : #4A4E5A
-	Headers 	: #30323A
-	Primary 	: #F8694A
-	Dark 		  :	#30323A
-	Grey 		  : #DADADA #F6F7F8
-
-Fonts: Hind
-
-Table OF Contents
-------------------------------------
-1 > GENERAL
------- typography
------- Buttons
------- Inputs
------- Lists
------- Sections
------- Breadcrumb
-2 > HEADER
------- Top header
------- Logo
------- Search header
------- Account header
------- Cart header
-3 > NAVIGATION
------- Category nav
------- Menu nav
------- Dropdowns
------- Mobile Nav
-4 > BANNERS
-5 > HOME SLIDER
-6 > PRODUCT
------- Single product
------- Widget product
------- Product slick
-7 > PRODUCTS PAGE
------- Aside
------- Store
-8 > PRODUCT DETAILS PAGE
------- Product view
------- Product details
------- Product tab
-9 > CHECKOUT PAGE
-10 > FOOTER
-11 > SLICK
------- Arrows
------- Dots
-12 > RESPONSIVE
-------------------------------------*/
-
-/*=========================================================
-	01 -> GENERAL
-===========================================================*/
-
-/*----------------------------*\
-	Typography
-\*----------------------------*/
-
 body {
   font-family: 'Hind', sans-serif;
   color: #4A4E5A;
@@ -109,12 +47,9 @@ ul, ol {
 hr {
   margin-top: 15px;
   margin-bottom: 15px;
-  border-color: #DADADA;
+  /*border-color: #DADADA;*/
+  border-color: #172d47;
 }
-
-/*----------------------------*\
-	Buttons
-\*----------------------------*/
 
 .main-btn, .primary-btn {
   display: inline-block;
@@ -158,10 +93,6 @@ hr {
   background-color: #30323A;
 }
 
-/*----------------------------*\
-	Inputs
-\*----------------------------*/
-
 .input {
   width: 100%;
   height: 40px;
@@ -197,10 +128,6 @@ textarea.input {
 .input-checkbox input[type="checkbox"]:checked+label+.caption, .input-checkbox input[type="radio"]:checked+label+.caption {
   max-height: 800px;
 }
-
-/*----------------------------*\
-	Lists
-\*----------------------------*/
 
 .list-links .list-links-title {
   text-transform: uppercase;
@@ -243,10 +170,6 @@ textarea.input {
   visibility: visible;
 }
 
-/*----------------------------*\
-	Sections
-\*----------------------------*/
-
 .section {
   padding-top: 30px;
   padding-bottom: 30px;
@@ -278,9 +201,6 @@ textarea.input {
   background-color: #F8694A;
 }
 
-/*----------------------------*\
-	Breadcrumb
-\*----------------------------*/
 
 #breadcrumb {
   -webkit-box-shadow: 0px 6px 6px -6px rgba(0, 0, 0, 0.175);
@@ -303,18 +223,11 @@ textarea.input {
   color: #DADADA;
 }
 
-/*=========================================================
-	02 -> HEADER
-===========================================================*/
-
 #header {
   padding-top: 15px;
   padding-bottom: 15px;
 }
 
-/*----------------------------*\
-	Top header
-\*----------------------------*/
 
 #top-header {
   padding-top: 5px;
@@ -335,10 +248,6 @@ textarea.input {
   text-transform: uppercase;
 }
 
-/*----------------------------*\
-	logo
-\*----------------------------*/
-
 .header-logo {
   display: inline-block;
   margin-right: 15px;
@@ -348,10 +257,6 @@ textarea.input {
   width: 100%;
   max-height: 70px;
 }
-
-/*----------------------------*\
-	Search header
-\*----------------------------*/
 
 .header-search {
   display: inline-block;
@@ -383,10 +288,6 @@ textarea.input {
   background-color: transparent;
   border: none;
 }
-
-/*----------------------------*\
-	Account header
-\*----------------------------*/
 
 .header-btns>li {
   display: inline-block;
@@ -420,10 +321,6 @@ textarea.input {
   margin-right: 15px;
   color: #F8694A;
 }
-
-/*----------------------------*\
-	Cart header
-\*----------------------------*/
 
 .header-cart .header-btns-icon .qty {
   position: absolute;
@@ -461,21 +358,14 @@ textarea.input {
   width: calc(50% - 2px);
 }
 
-/*=========================================================
-	03 -> NAVIGATION
-===========================================================*/
-
 #navigation {
-  background-color: #30323A;
+  /*background-color: #30323A;*/
+  background-color: #172d47;  
 }
 
 #navigation .container {
   position: relative;
 }
-
-/*----------------------------*\
-	Category nav
-\*----------------------------*/
 
 .category-nav {
   float: left;
@@ -543,10 +433,6 @@ textarea.input {
   color: #F8694A;
 }
 
-/*----------------------------*\
-	Menu nav
-\*----------------------------*/
-
 .menu-nav .menu-header {
   display: none;
   padding: 15px;
@@ -576,10 +462,6 @@ textarea.input {
   color: #F8694A;
 }
 
-/*----------------------------*\
-	Dropdowns
-\*----------------------------*/
-
 .custom-menu {
   position: absolute;
   padding: 15px;
@@ -600,8 +482,6 @@ textarea.input {
   visibility: visible;
 }
 
-/*-- Default Dropdown --*/
-
 .dropdown.default-dropdown>.custom-menu {
   border-top: 2px solid #F8694A;
   left: 50%;
@@ -621,8 +501,6 @@ textarea.input {
   padding: 10px 0px;
   text-transform: uppercase;
 }
-
-/*-- Mega Dropdown --*/
 
 .dropdown.mega-dropdown.full-width {
   position: static !important;
@@ -649,8 +527,6 @@ textarea.input {
   transform: translate(0px, 0px);
 }
 
-/*-- Side Dropdown --*/
-
 .dropdown.side-dropdown>.custom-menu {
   border-left: 2px solid #F8694A;
   left: 100%;
@@ -666,10 +542,6 @@ textarea.input {
   -ms-transform: translate(0px, 0px);
   transform: translate(0px, 0px);
 }
-
-/*----------------------------*\
-	Mobile nav
-\*----------------------------*/
 
 #header .nav-toggle {
   display: none;
@@ -772,10 +644,6 @@ textarea.input {
   }
 }
 
-/*=========================================================
-	04 -> BANNERS
-===========================================================*/
-
 .banner {
   display: block;
   position: relative;
@@ -808,10 +676,6 @@ textarea.input {
   text-transform: uppercase;
 }
 
-/*=========================================================
-	05 -> HOME SLIDER
-===========================================================*/
-
 #home .home-wrap {
   margin-left: 270px;
 }
@@ -819,10 +683,6 @@ textarea.input {
 #home-slick .banner {
   margin: 0px;
 }
-
-/*=========================================================
-	06 -> PRODUCT
-===========================================================*/
 
 .product .product-old-price {
   color: #F8694A;
@@ -878,10 +738,6 @@ textarea.input {
   padding: 10px;
   background: #F8694A;
 }
-
-/*----------------------------*\
-	Single product
-\*----------------------------*/
 
 .product.product-single {
   margin-top: 15px;
@@ -992,8 +848,6 @@ textarea.input {
   visibility: visible;
 }
 
-/*-- hot product --*/
-
 .product.product-single.product-hot {
   border: 2px solid #F8694A;
 }
@@ -1002,10 +856,6 @@ textarea.input {
   opacity: 1;
   visibility: visible;
 }
-
-/*----------------------------*\
-	 Widget product
-\*----------------------------*/
 
 .product.product-widget {
   position: relative;
@@ -1057,22 +907,10 @@ textarea.input {
   color: #30323A;
 }
 
-/*----------------------------*\
-	Product slick
-\*----------------------------*/
-
 .product-slick .slick-slide {
   margin-right: 15px;
   margin-left: 15px;
 }
-
-/*=========================================================
-	07 -> PRODUCTS PAGE
-===========================================================*/
-
-/*----------------------------*\
-	Aside
-\*----------------------------*/
 
 #aside .aside {
   margin-bottom: 30px;
@@ -1102,8 +940,6 @@ textarea.input {
   width: 60px;
   background-color: #F8694A;
 }
-
-/*-- Filter list --*/
 
 .filter-list {
   margin-bottom: 15px;
@@ -1139,8 +975,6 @@ textarea.input {
   border-radius: 50%;
   height: 12px;
 }
-
-/*-- Price Filter --*/
 
 #price-slider {
   margin: 60px 0px 50px;
@@ -1185,10 +1019,6 @@ textarea.input {
   border-radius: 0px;
 }
 
-/*----------------------------*\
-	Store
-\*----------------------------*/
-
 #store {
   margin-top: 15px;
   padding-top: 30px;
@@ -1197,8 +1027,6 @@ textarea.input {
   padding-bottom: 30px;
   border-bottom: 1px solid #DADADA;
 }
-
-/*-- store filter --*/
 
 .row-filter {
   display: inline-block;
@@ -1262,14 +1090,6 @@ textarea.input {
   color: #F8694A;
 }
 
-/*=========================================================
-	08 -> PRODUCT DETAILS PAGE
-===========================================================*/
-
-/*----------------------------*\
-	Product view
-\*----------------------------*/
-
 #product-main-view .slick-arrow {
   opacity: 0;
 }
@@ -1300,10 +1120,6 @@ textarea.input {
 .product-view>img {
   width: 100%;
 }
-
-/*----------------------------*\
-	Product details
-\*----------------------------*/
 
 .product.product-details .product-name {
   margin-top: 15px;
@@ -1378,10 +1194,6 @@ textarea.input {
   width: 90px;
 }
 
-/*----------------------------*\
-	Product tab
-\*----------------------------*/
-
 .product-tab {
   margin-top: 30px;
 }
@@ -1423,8 +1235,6 @@ textarea.input {
   width: 30px;
   background-color: #F8694A;
 }
-
-/*-- reviews --*/
 
 .single-review {
   margin-bottom: 30px;
@@ -1468,8 +1278,6 @@ textarea.input {
 .reviews-pages li.active {
   color: #F8694A;
 }
-
-/*-- review form --*/
 
 .review-form textarea.input {
   height: 90px;
@@ -1520,15 +1328,9 @@ textarea.input {
   color: #FFB656;
 }
 
-/*=========================================================
-	09 -> CHECKOUT PAGE
-===========================================================*/
-
 .shiping-methods {
   margin-bottom: 30px;
 }
-
-/*-- shopping cart table --*/
 
 .shopping-cart-table>tbody>tr>td, .shopping-cart-table>tbody>tr>th, .shopping-cart-table>tfoot>tr>td, .shopping-cart-table>tfoot>tr>th, .shopping-cart-table>thead>tr>td, .shopping-cart-table>thead>tr>th {
   padding: 15px 0px;
@@ -1587,10 +1389,6 @@ textarea.input {
   color: #F8694A;
 }
 
-/*=========================================================
-	10 -> FOOTER
-===========================================================*/
-
 .footer {
   margin: 15px 0px;
 }
@@ -1630,14 +1428,6 @@ textarea.input {
   font-size: 14px;
 }
 
-/*=========================================================
-	11 -> SLICK
-===========================================================*/
-
-/*----------------------------*\
-	Arrows
-\*----------------------------*/
-
 .slick-prev, .slick-next {
   width: 40px;
   height: 40px;
@@ -1669,10 +1459,6 @@ textarea.input {
   transform: translate(0px, 0px);
 }
 
-/*----------------------------*\
-	Dots
-\*----------------------------*/
-
 .slick-dots li, .slick-dots li button, .slick-dots li button:before {
   width: 10px;
   height: 10px;
@@ -1693,10 +1479,6 @@ textarea.input {
   position: static;
   margin: 15px 0px;
 }
-
-/*=========================================================
-	12 -> RESPONSIVE
-===========================================================*/
 
 @media only screen and (max-width: 991px) {
   #home .home-wrap {

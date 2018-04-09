@@ -147,7 +147,7 @@
                     </ul>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 
     <!-- <div id="breadcrumb">
@@ -170,7 +170,7 @@
     <footer id="footer" class="section section-grey">
         <div class="container">
             <div class="row">                
-                <div class="col-md-4 col-sm-6 col-xs-6">
+                <div class="col-md-4">
                     <div class="footer">
                         <h3 class="footer-header">Informasi</h3>
                         <ul class="list-links">                            
@@ -182,7 +182,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4 col-sm-6 col-xs-6">
+                <div class="col-md-4">
                     <div class="footer">
                         <h3 class="footer-header">Akun Saya</h3>
                         <ul class="list-links">
@@ -194,7 +194,7 @@
 
                 <div class="clearfix visible-sm visible-xs"></div>
 
-                <div class="col-md-4 col-sm-6 col-xs-6">
+                <div class="col-md-4">
                     <div class="footer">
                         <div class="footer-logo">
                             <a class="logo" href="#">
@@ -202,15 +202,7 @@
                             </a>
                         </div>        
 
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
-
-                        <ul class="footer-social">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                        </ul>
+                        <p>Contact: sales@evagconservation.co.id</p>                        
                     </div>
                 </div>
             </div>
@@ -218,7 +210,7 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 text-center">
                     <div class="footer-copyright">
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+                        &copy; <script>document.write(new Date().getFullYear());</script> Evag Conservation All Right Reserved.
                     </div>
                 </div>
             </div>
