@@ -1,118 +1,237 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="id">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <META name="Description" content="Asia Museum Supplies - Museum Quality Conservation Supplies">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Evag Conservation - Perlengkapan Konservasi Kualitas Museum</title>
+    
+    <link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
+    
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    
+    <link type="text/css" rel="stylesheet" href="css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="css/slick-theme.css" />
+    
+    <link type="text/css" rel="stylesheet" href="css/nouislider.min.css" />
+    
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
-    <script type="text/javascript">
-        var djConfig = {
-            parseOnLoad: true,
-            modulePaths: { 
-
-                "dojo": "https://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo", 
-
-                "dijit": "https://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit", 
-
-                "dojox": "https://ajax.googleapis.com/ajax/libs/dojo/1.6/dojox" 
-            } 
-        };
-    </script>
-    <script src="{{ asset('js/dojo.xd.js') }}" defer></script>
-    <script src="{{ asset('js/jquery.js') }}" defer></script>
-    <script src="{{ asset('js/jquery-ui.custom.min.js') }}" defer></script>    
-    <script src="{{ asset('js/script.js') }}" defer></script>
-    <script src="{{ asset('js/validate.js') }}" defer></script>    
-
-    <!-- Styles -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/tundra.css') }}" rel="stylesheet">    
 </head>
-<body>
-    <div id="wrap">
-      <div id="main">
-        <div id="top" class="pageWidth">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                    <td width="520" height="159" align="left" valign="top"><div class="top_content"><a href="{{ url('/') }}"><img src="img/logo.png" width="220" height="105" border="0" align="absmiddle"/></a><img src="img/tagline.png" width="291" height="85" border="0" align="absmiddle"/></div></td>
-                    <td align="right" valign="top"><div class="top_content shopping_cart"><div class="title">Shopping Cart</div><div class="items" id="cart_total_box"><a href="cartcontent.php"><span id='cart_count'>0</span> item(s) - <span id='cart_total'>S$ 0.00</span></a></div></div></td>
-                    <td width="329" align="right" valign="top">
-                        <div class="top_right top_content">
-                            <div class="searchInput">
-                                <table width="273" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td width="29"><a href="javascript:advancedSearchToggleBtnClicked()"><img src="img/search_btn.png" width="29" height="26" border="0" /></a></td>
-                                        <td><input name="search_value" id="search_value" type="text" value="- Enter Keyword -" class="search_input" onkeydown="return search_input_keydown(event)"/></td>
-                                    </tr>
-                                </table>
-                                <div class="line first">Welcome visitor you can <a href="{{ route('login') }}">login</a> or <a href="{{ route('register') }}">create an account</a></div>
-                                <div class="line second"><a href="{{ url('/') }}">Home</a> | <a href="{{ route('login') }}">Login</a> | <a href="{{ route('register') }}">Register</a></div>
+
+<body>    
+    <header>
+        <div id="header">
+            <div class="container">
+                <div class="pull-left">                    
+                    <div class="header-logo">
+                        <a class="logo" href="#">
+                            <img src="./img/logo.png" style="width: 155px;height: 70px;" alt="">
+                        </a>
+                    </div>                    
+                    
+                    <div class="header-search">
+                        <form>
+                            <input class="input  search-input" type="text" placeholder="Masukkan kata kunci Anda">
+                            <button class="search-btn"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>                    
+                </div>
+                <div class="pull-right">
+                    <ul class="header-btns">                        
+                        <li class="header-account dropdown default-dropdown">
+                            <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
+                                <div class="header-btns-icon">
+                                    <i class="fa fa-user-o"></i>
+                                </div>
+                                <strong class="text-uppercase">Akun saya</strong>
                             </div>
-                            <div class="line third">        
-                                Contact: <a href="mailto:sales@asiamuseumsupplies.com">sales@asiamuseumsupplies.com</a>
-                            </div>       
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div id="inner_content" class="pageWidth">
-            <div class="category_menu">
-                <div class="sidebar_menu">
-                    <div class="sidebar_category"><a href="category.php?c=2">Conservation Materials</a></div><div class="sidebar_subcat_box"><div class="sidebar_subcategory"><a href="products.php?c=5">Melinex Conservation Polyester</a></div><div class="sidebar_subcategory"><a href="products.php?c=6">Japanese Tissue </a></div><div class="sidebar_subcategory"><a href="products.php?c=29">Museum Mounting Boards</a></div><div class="sidebar_subcategory"><a href="products.php?c=36">Conservation Boards</a></div><div class="sidebar_subcategory"><a href="products.php?c=37">Acid Free Paper</a></div><div class="sidebar_subcategory"><a href="products.php?c=41">Acid Free Photo Sleeves</a></div></div><div class="sidebar_category"><a href="category.php?c=8">Museum Case Supplies</a></div><div class="sidebar_subcat_box"><div class="sidebar_subcategory"><a href="products.php?c=24">Display Case Hygrometer</a></div><div class="sidebar_subcategory"><a href="products.php?c=28">Drying Agent</a></div><div class="sidebar_subcategory"><a href="products.php?c=39">Museum Artifact Mounts</a></div><div class="sidebar_subcategory"><a href="products.php?c=40">Museum Display Bookmounts</a></div></div><div class="sidebar_category"><a href="category.php?c=12">Conservation Supplies</a></div><div class="sidebar_subcat_box"><div class="sidebar_subcategory"><a href="products.php?c=13">Adhesive &amp; Linings</a></div></div><div class="sidebar_category"><a href="category.php?c=17">Archival Storage</a></div><div class="sidebar_subcat_box"><div class="sidebar_subcategory"><a href="products.php?c=18">Film Storage</a></div><div class="sidebar_subcategory"><a href="products.php?c=19">CD/DVD Archival Storage</a></div><div class="sidebar_subcategory"><a href="products.php?c=20">Archival Photo/Document Album</a></div><div class="sidebar_subcategory"><a href="products.php?c=21">Archival Media &amp; Photo Storage </a></div><div class="sidebar_subcategory"><a href="products.php?c=35">Archival Document Boxes</a></div></div><div class="sidebar_category"><a href="category.php?c=22">Micrographics</a></div><div class="sidebar_subcat_box"><div class="sidebar_subcategory"><a href="products.php?c=23">Digital to Microfilm Plotter</a></div><div class="sidebar_subcategory"><a href="products.php?c=31">Colour Microfilm Deep Tank Processor</a></div><div class="sidebar_subcategory"><a href="products.php?c=25">Microfilm Viewer/Scanner</a></div><div class="sidebar_subcategory"><a href="products.php?c=26">Microfilm Consumables &amp; Accessories</a></div></div><div class="sidebar_category"><a href="category.php?c=30">Singapore Press Holdings Newspapers</a></div><div class="sidebar_subcat_box"><div class="sidebar_subcategory"><a href="products.php?c=32">SPH Micropublishing</a></div><div class="sidebar_subcategory"><a href="products.php?c=34">SPH Digital Newspaper</a></div></div><div class="sidebar_category"><a href="category.php?c=38">Scanners</a></div><div class="sidebar_subcat_box"><div class="sidebar_subcategory"><a href="products.php?c=42">Book Scanners</a></div></div>
+                            <a href="#" class="text-uppercase">Masuk</a>                            
+                        </li>
+                        
+                        <li class="header-cart dropdown default-dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <div class="header-btns-icon">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <span class="qty">0</span>
+                                </div>
+                                <strong class="text-uppercase">Keranjang saya:</strong>
+                                <br>
+                                <span>0 item - Rp0</span>
+                            </a>
+                            <div class="custom-menu">
+                                <div id="shopping-cart">
+                                    <div class="shopping-cart-list">
+                                        <div class="product product-widget">
+                                            <div class="product-thumb">
+                                                <img src="./img/thumb-product01.jpg" alt="">
+                                            </div>
+                                            <div class="product-body">
+                                                <h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
+                                                <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
+                                            </div>
+                                            <button class="cancel-btn"><i class="fa fa-trash"></i></button>
+                                        </div>
+                                        <div class="product product-widget">
+                                            <div class="product-thumb">
+                                                <img src="./img/thumb-product01.jpg" alt="">
+                                            </div>
+                                            <div class="product-body">
+                                                <h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
+                                                <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
+                                            </div>
+                                            <button class="cancel-btn"><i class="fa fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="shopping-cart-btns">
+                                        <button class="main-btn">View Cart</button>
+                                        <button class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li class="nav-toggle">
+                            <button class="nav-toggle-btn main-btn icon-btn"><i class="fa fa-bars"></i></button>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>            
+        </div>        
+    </header>    
+    
+    <div id="navigation">        
+        <div class="container">
+            <div id="responsive-nav">                
+                <div class="category-nav show-on-click">
+                    <span class="category-header">Kategori <i class="fa fa-list"></i></span>
+                    <ul class="category-list">
+                        <!-- foreach($categorys as $category) -->
+                        <li class="dropdown side-dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Category <i class="fa fa-angle-right"></i></a>
+                            <div class="custom-menu">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <ul class="list-links">
+                                            <li>
+                                                <h3 class="list-links-title">Category</h3>
+                                            </li>
+                                            <!-- foreach($sub_categorys as $subcategory) -->
+                                            <div class="col-md-4">
+                                                <ul class="list-links">
+                                                    <li><a href="#">Sub Category</a></li>
+                                                </ul>
+                                            </div>
+                                            <!-- endforeach -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- endforeach -->
+                    </ul>
+                </div>
+
+                <div class="menu-nav">
+                    <span class="menu-header">Menu <i class="fa fa-bars"></i></span>
+                    <ul class="menu-list">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Akun Saya</a></li>
+                        <li><a href="#">Riwayat Pesanan</a></li>
+                        <li><a href="#">Keranjang Saya</a></li>
+                        <li><a href="#">Checkout</a></li>                        
+                    </ul>
                 </div>
             </div>
-            <div class="right_content">
-                <div class="content">
-                    @yield('content')
-                </div>
+        </div>        
+    </div>
+
+    <!-- <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Blank</li>
+            </ul>
+        </div>
+    </div> -->
+
+    <div class="section">                       
+        <div class="container">
+            <div class="row">
+                @yield('content')
             </div>
-            <div style="clear:both"></div>
         </div>
     </div>
-</div>
-<div id="footer">
-    <div class="pageWidth">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-                <td width="56%" align="left" valign="top">
-                    <div class="footer_content">
-                        <div class="information">
-                            <div class="title">Information</div>
-                            <div class="links">
-                                <a href="content.php?p=3">About Us</a><br />
-                                <a href="content.php?p=17">Contact Us</a><br />
-                                <a href="content.php?p=15">Privacy Policy</a><br />
-                                <a href="content.php?p=16">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                        <div class="account">
-                            <div class="title">My Account</div>
-                            <div class="links">
-                                <a href="profile.php">My Account</a><br />
-                                <a href="history.php">Order History</a><br />
-                            </div>
-                        </div>
-                        <div style="clear:both"></div>
+
+    <footer id="footer" class="section section-grey">
+        <div class="container">
+            <div class="row">                
+                <div class="col-md-4 col-sm-6 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-header">Informasi</h3>
+                        <ul class="list-links">                            
+                            <li><a href="#">Tentang Kami</a></li>
+                            <li><a href="#">Hubungi Kami</a></li>
+                            <li><a href="#">Kebijakan Pribadi</a></li>
+                            <li><a href="#">Syarat $ Ketentuan</a></li>
+                        </ul>
                     </div>
-                </td>
-                <td width="44%" height="354" align="left" valign="top">
-                    <div class="did_you_know">
-                        <img src="img/footer_pic.jpg" width="436" height="353" />
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-header">Akun Saya</h3>
+                        <ul class="list-links">
+                            <li><a href="#">Akun Saya</a></li>
+                            <li><a href="#">Riwayat Pesanan</a></li>                            
+                        </ul>
                     </div>
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
+                </div>
+
+                <div class="clearfix visible-sm visible-xs"></div>
+
+                <div class="col-md-4 col-sm-6 col-xs-6">
+                    <div class="footer">
+                        <div class="footer-logo">
+                            <a class="logo" href="#">
+                                <img src="./img/logo.png" style="width: 155px;height: 70px;" alt="">
+                            </a>
+                        </div>        
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
+
+                        <ul class="footer-social">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center">
+                    <div class="footer-copyright">
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/nouislider.min.js"></script>
+    <script src="js/jquery.zoom.min.js"></script>
+    <script src="js/main.js"></script>
+
 </body>
+
 </html>
