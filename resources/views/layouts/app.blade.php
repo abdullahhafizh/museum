@@ -124,12 +124,12 @@
                                                 <h3 class="list-links-title"><a class="{{ Request::segment(2) === $category->name ? 'active' : null }}" href="{{ url($category->name) }}">{{ $category->name }}</a></h3>
                                             </li>
                                             <?php
-                                            $sub_categories = \App\SubCat::where('category', '=', $category->name)->get();
+                                            $sub_categories = \App\SubCat::where('category', '=', $category->code)->get();
                                             ?>
                                             @foreach($sub_categories as $sub_category)
                                             <div class="col-md-4">
                                                 <ul class="list-links">
-                                                    <li class="{{ Request::segment(3) === $sub_category->name ? 'active' : null }}"><a href="{{ url($sub_category->category.'/'.$sub_category->name) }}">{{ $sub_category->name }}</a></li>
+                                                    <li class="{{ Request::segment(3) === $sub_category->name ? 'active' : null }}"><a href="{{ url($category->name.'/'.$sub_category->name) }}">{{ $sub_category->name }}</a></li>
                                                 </ul>
                                             </div>
                                             @endforeach                                            
@@ -149,7 +149,7 @@
                         @auth
                         <li><a class="{{ Request::segment(1) === 'profile' ? 'active' : null }}" href="{{ url('profile') }}">Akun Saya</a></li>
                         <li><a href="#">Riwayat Pesanan</a></li>
-                        <li><a href="{{ route('cart') }}">Keranjang Saya</a></li>
+                        <li><a class="{{ Request::segment(1) === 'cart' ? 'active' : null }}" href="{{ route('cart') }}">Keranjang Saya</a></li>
                         <li><a href="#">Checkout</a></li>
                         @endauth
                         @guest
@@ -162,14 +162,21 @@
         </div>
     </div>
 
-    <!-- <div id="breadcrumb">
+    <div id="breadcrumb">
         <div class="container">
             <ul class="breadcrumb">
-                <li><a href="{{ url('/') }}">Home</a></li>
-                <li class="active">Blank</li>
+                <li class="{{ Request::segment(1) === null ? 'active' : null }}">Home</li>
+                @if(Request::segment(1) === null)
+                @else
+                <li class="{{ Request::segment(2) === null ? 'active' : null }}">{{ Request::segment(1) === 'cart' ? 'Keranjang Saya' : null }}{{ Request::segment(1) === 'profile' ? 'Akun Saya' : null }}
+                    @foreach($categories as $category)
+                    {{ Request::segment(1) === $category->name ? $category->name : null }}
+                    @endforeach                    
+                </li>
+                @endif                    
             </ul>
         </div>
-    </div> -->
+    </div>
 
     <div class="section">                       
         <div class="container">

@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data['products'] = Product::orderBy('created_at', 'desc')->paginate(10);
+        $data['products'] = Product::orderBy('created_at', 'desc')->paginate(12);
         return view('home')->with($data);
     }
 
@@ -24,7 +24,7 @@ class HomeController extends Controller
         $search = $request->input('keyword');
         $data['search'] = $search;
         $data['title'] = $search;
-        $data['products'] = Product::where('name', 'LIKE', $search, 'OR', 'company', 'LIKE', $search, 'OR', 'category', 'LIKE', $search, 'OR', 'subcat', 'LIKE', $search)->get();
+        $data['products'] = Product::where('name', 'LIKE', '%'.$search.'%', 'OR', 'code', 'LIKE', '%'.$search.'%', 'OR', 'company', 'LIKE', '%'.$search.'%', 'OR', 'category', 'LIKE', '%'.$search.'%', 'OR', 'subcat', 'LIKE', '%'.$search.'%')->get();
         return view('home')->with($data);
     }
 
