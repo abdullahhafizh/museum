@@ -18,16 +18,14 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(Cart::content() as $row)                    
+                @foreach(Cart::content() as $row)
                 <tr>
                     <td class="thumb"><img src="./img/thumb-product01.jpg" alt=""></td>
                     <td class="details">
-                        <a href="#">{{ $row->name }}</a>
-                        <ul>
-
+                        <a href="{{ url($row->options->category.'/'.$row->options->subcat.'/'.$row->id) }}">{{ $row->name }}</a>
+                        <!-- <ul>
                             <li><span{{ $row->options->has('size') ? $row->options->size : null }}</span></li>
-
-                        </ul>
+                        </ul> -->
                     </td>
                     <td class="price text-center"><strong>Rp{{ $row->price }}</strong></td>
                     <td class="qty text-center">
@@ -37,7 +35,7 @@
                             <input type="hidden" name="id" value="{{ $row->rowId }}">
                         </form>
                     </td>
-                    <td class="total text-center"><strong class="primary-color">Rp{{ $row->total }}</strong></td>
+                    <td class="total text-center"><strong class="primary-color">Rp{{ $row->subtotal }}</strong></td>
                     <td class="text-right"><button class="main-btn icon-btn" onclick="event.preventDefault();document.getElementById('{{ $row->rowId }}').submit();"><i class="fa fa-close"></i></button></td>
                     <form id="{{ $row->rowId }}" method="POST" action="{{ route('remove') }}" style="display: none;">
                         @csrf                        
@@ -50,7 +48,7 @@
                 <tr>
                     <th class="empty" colspan="3"></th>
                     <th>TOTAL</th>
-                    <th colspan="2" class="total">Rp{{ Cart::total() }}</th>
+                    <th colspan="2" class="total">Rp{{ Cart::subtotal() }}</th>
                 </tr>
             </tfoot>
         </table>

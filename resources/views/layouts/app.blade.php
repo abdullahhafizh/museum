@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">    
 
     <title>Evag Conservation - Perlengkapan Konservasi Kualitas Museum</title>
-    
-    <link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">    
+        
     <link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
     <link type="text/css" rel="stylesheet" href="{{asset('css/slick.css')}}" />
     <link type="text/css" rel="stylesheet" href="{{asset('css/slick-theme.css')}}" />
@@ -61,7 +60,7 @@
                                 </div>
                                 <strong class="text-uppercase">Keranjang saya :</strong>
                                 <br>
-                                <span style="font-size: 14px;font-size: calc(0.64vw + 0.5vh);;">{{ Cart::count() }} item - Rp{{ Cart::total() }}</span>
+                                <span style="font-size: 14px;font-size: calc(0.64vw + 0.5vh);;">{{ Cart::count() }} item - Rp{{ Cart::subtotal() }}</span>
                             </div>
                             <div class="custom-menu">
                                 <div id="shopping-cart">
@@ -73,7 +72,7 @@
                                             </div>
                                             <div class="product-body">
                                                 <h3 class="product-price">Rp{{ $row->price }} <span class="qty">x{{ $row->qty }}</span></h3>
-                                                <h2 class="product-name"><a href="#">{{ $row->name }}</a></h2>
+                                                <h2 class="product-name"><a href="{{ url($row->options->category.'/'.$row->options->subcat.'/'.$row->id) }}">{{ $row->name }}</a></h2>
                                             </div>
                                             <button class="cancel-btn"><i class="fa fa-trash"></i></button>
                                         </div>
