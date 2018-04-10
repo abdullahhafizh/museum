@@ -150,7 +150,8 @@ return [
         /*
          * Package Service Providers...
          */
-        Laravel\Socialite\SocialiteServiceProvider::class,
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        // Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -183,6 +184,8 @@ return [
         'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
         'Bus' => Illuminate\Support\Facades\Bus::class,
         'Cache' => Illuminate\Support\Facades\Cache::class,
+        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Category' => \App\Category::class,
         'Config' => Illuminate\Support\Facades\Config::class,
         'Cookie' => Illuminate\Support\Facades\Cookie::class,
         'Crypt' => Illuminate\Support\Facades\Crypt::class,
@@ -208,6 +211,7 @@ return [
         'Session' => Illuminate\Support\Facades\Session::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Storage' => Illuminate\Support\Facades\Storage::class,
+        'SubCat' => \App\Subcat::class,
         'URL' => Illuminate\Support\Facades\URL::class,
         'User' => \App\User::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,

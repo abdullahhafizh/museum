@@ -57,35 +57,27 @@
                             <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <div class="header-btns-icon">
                                     <i class="fa fa-shopping-cart"></i>
-                                    <span class="qty">0</span>
+                                    <span class="qty">{{Cart::content()->count()}}</span>
                                 </div>
                                 <strong class="text-uppercase">Keranjang saya :</strong>
                                 <br>
-                                <span>0 item - Rp0</span>
+                                <span style="font-size: 14px;font-size: calc(0.64vw + 0.5vh);;">{{ Cart::count() }} item - Rp{{ Cart::total() }}</span>
                             </div>
                             <div class="custom-menu">
                                 <div id="shopping-cart">
                                     <div class="shopping-cart-list">
+                                        @foreach(Cart::content() as $row)
                                         <div class="product product-widget">
                                             <div class="product-thumb">
                                                 <img src="{{url('img/thumb-product01.jpg')}}" alt="">
                                             </div>
                                             <div class="product-body">
-                                                <h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
-                                                <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
+                                                <h3 class="product-price">Rp{{ $row->price }} <span class="qty">x{{ $row->qty }}</span></h3>
+                                                <h2 class="product-name"><a href="#">{{ $row->name }}</a></h2>
                                             </div>
                                             <button class="cancel-btn"><i class="fa fa-trash"></i></button>
                                         </div>
-                                        <div class="product product-widget">
-                                            <div class="product-thumb">
-                                                <img src="{{url('img/thumb-product01.jpg')}}" alt="">
-                                            </div>
-                                            <div class="product-body">
-                                                <h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
-                                                <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-                                            </div>
-                                            <button class="cancel-btn"><i class="fa fa-trash"></i></button>
-                                        </div>
+                                        @endforeach
                                     </div>
                                     <div class="shopping-cart-btns">
                                         <a href="{{ route('cart') }}" class="main-btn">View Cart</a>
@@ -111,25 +103,25 @@
                     <span class="category-header">Kategori <i class="fa fa-list"></i></span>
                     <ul class="category-list">
                         <?php
-                        $categories = \App\Category::all();                        
+                        $categories = Category::all();                        
                         ?>
                         @foreach($categories as $category)
                         <li class="dropdown side-dropdown">
-                            <a class="dropdown-toggle {{ Request::segment(2) === $category->name ? 'active' : null }}" data-toggle="dropdown" aria-expanded="true">{{ $category->name }} <i class="fa fa-angle-right"></i></a>
+                            <a class="dropdown-toggle {{ Request::segment(1) === $category->name ? 'active' : null }}" data-toggle="dropdown" aria-expanded="true">{{ $category->name }} <i class="fa fa-angle-right"></i></a>
                             <div class="custom-menu">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <ul class="list-links">
                                             <li>
-                                                <h3 class="list-links-title"><a class="{{ Request::segment(2) === $category->name ? 'active' : null }}" href="{{ url($category->name) }}">{{ $category->name }}</a></h3>
+                                                <h3 class="list-links-title"><a class="{{ Request::segment(1) === $category->name ? 'active' : null }}" href="{{ url($category->name) }}">{{ $category->name }}</a></h3>
                                             </li>
                                             <?php
-                                            $sub_categories = \App\SubCat::where('category', '=', $category->code)->get();
+                                            $sub_categories = SubCat::where('category', '=', $category->code)->get();
                                             ?>
                                             @foreach($sub_categories as $sub_category)
                                             <div class="col-md-4">
                                                 <ul class="list-links">
-                                                    <li class="{{ Request::segment(3) === $sub_category->name ? 'active' : null }}"><a href="{{ url($category->name.'/'.$sub_category->name) }}">{{ $sub_category->name }}</a></li>
+                                                    <li class="{{ Request::segment(2) === $sub_category->name ? 'active' : null }}"><a href="{{ url($category->name.'/'.$sub_category->name) }}">{{ $sub_category->name }}</a></li>
                                                 </ul>
                                             </div>
                                             @endforeach                                            
@@ -173,6 +165,10 @@
                     {{ Request::segment(1) === $category->name ? $category->name : null }}
                     @endforeach                    
                 </li>
+                <!-- <?php
+                $sub = SubCat::where('category', '=', $category->code)->get();
+                ?>
+                <li class="{{ Request::segment(2) === null ? 'active' : null }}">Home</li> -->
                 @endif                    
             </ul>
         </div>

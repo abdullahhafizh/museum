@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Product;
+use Cart;
+use Auth;
 
 class HomeController extends Controller
 {    
@@ -60,6 +62,26 @@ class HomeController extends Controller
     public function cart()
     {
         return view('cart');
+    }
+
+    public function add(Request $request)
+    {        
+        Cart::add($request->input('id'), $request->input('name'), $request->input('qty'), $request->input('price'));        
+        return back();
+    }
+
+    public function edit(Request $request)
+    {
+        $rowId = $request->input('id');
+        Cart::update($rowId, ['qty' => $request->input('qty')]);
+        return back();
+    }
+
+    public function remove(Request $request)
+    {
+        $rowId = $request->input('id');
+        Cart::remove($rowId);
+        return back();
     }
 
 }

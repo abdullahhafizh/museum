@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Socialite;
 
-class AuthController extends Controller
+class SocialiteController extends Controller
 {
     /**
      * Redirect the user to the OAuth Provider.

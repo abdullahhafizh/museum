@@ -21,7 +21,16 @@
             <h3 class="product-price">Rp{{ $product->price }}</h3>            
             <h2 class="product-name"><a href="{{ url($product->category.'/'.$product->subcat.'/'.$product->id) }}">{{ $product->name }}</a></h2>
             <div class="product-btns">            
-                <a class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                <a href="{{ route('add') }}" class="primary-btn add-to-cart" onclick="event.preventDefault();document.getElementById('add-form{{ $product->id }}').submit();"><i class="fa fa-shopping-cart"></i> Add to Cart</a>                
+                <form id="add-form{{ $product->id }}" action="{{ route('add') }}" method="POST" style="display: none;">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $product->id }}">
+                    <input type="hidden" name="name" value="{{ $product->name }}">
+                    <input type="hidden" name="qty" value="1">
+                    <input type="hidden" name="price" value="{{ $product->price }}">
+                    <input type="hidden" name="price" value="{{ $product->category }}">
+                    <input type="hidden" name="price" value="{{ $product->subcat }}">
+                </form>
             </div>
         </div>
     </div>
