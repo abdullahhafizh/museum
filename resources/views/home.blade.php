@@ -5,6 +5,7 @@
     <div class="section-title">
         <h2 class="title">{{ $title or 'Terbaru'}}</h2>
     </div>
+    {{Cart::content()}}
     @if(sizeof($products)<=0)
     kosong
     @endif
@@ -28,8 +29,8 @@
                     <input type="hidden" name="name" value="{{ $product->name }}">
                     <input type="hidden" name="qty" value="1">
                     <input type="hidden" name="price" value="{{ $product->price }}">
-                    <input type="hidden" name="price" value="{{ $product->category }}">
-                    <input type="hidden" name="price" value="{{ $product->subcat }}">
+                    <input type="hidden" name="category" value="{{ $product->category }}">
+                    <input type="hidden" name="subcat" value="{{ $product->subcat }}">
                 </form>
             </div>
         </div>

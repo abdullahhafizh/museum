@@ -101,7 +101,7 @@
             <input id="kota" type="text" class="input" name="kota" value="{{ $user->kota or old('kota') }}" placeholder="Kota">            
         </div>
         <div class="form-group col-md-6">
-            <textarea id="alamat" class="input" name="alamat" required>{{ $user->kota or old('alamat') }}</textarea>
+            <textarea id="alamat" class="input" name="alamat" required>{{ $user->alamat or old('alamat') }}</textarea>
         </div>
         <div class="form-group col-md-6">
             <input id="kode_pos" type="number" class="input" name="kode_pos" value="{{ $user->kode_pos or old('kode_pos') }}" placeholder="Kode Pos" required>            

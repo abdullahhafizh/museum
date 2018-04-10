@@ -41,8 +41,8 @@ class AuthController extends Controller
         $user->kode_pos = $request->input('kode_pos');
     	if (!$request->input('password') == null) {    		
     		$user->password = Hash::make($request->input('password'));
-    	}
-    	$user->save();
+    	}        
+    	$user->save();        
     	return redirect(url('profile'))	;
     }
 }

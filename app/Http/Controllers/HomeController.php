@@ -65,8 +65,17 @@ class HomeController extends Controller
     }
 
     public function add(Request $request)
-    {        
-        Cart::add($request->input('id'), $request->input('name'), $request->input('qty'), $request->input('price'));        
+    {
+        Cart::add([
+            'id' => $request->input('id'),
+            'name' => $request->input('name'),
+            'qty' => $request->input('qty'),
+            'price' => $request->input('price'),
+            'options' => [
+                'category' => $request->input('category'),
+                'subcat' => $request->input('subcat'),
+            ]
+        ]);        
         return back();
     }
 
@@ -83,5 +92,11 @@ class HomeController extends Controller
         Cart::remove($rowId);
         return back();
     }
+
+    public function destroy()
+    {        
+        Cart::destroy();
+        return back();
+    }    
 
 }

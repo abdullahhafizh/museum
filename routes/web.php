@@ -21,6 +21,7 @@ Route::post('update', 'Auth\AuthController@update')->name('update');
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('cart', 'HomeController@cart')->name('cart');
+Route::get('destroy', 'HomeController@destroy')->name('destroy');
 Route::get('profile', 'Auth\AuthController@profile')->name('profile');
 
 Route::get('auth/{provider}', 'Auth\SocialiteController@redirectToProvider');
