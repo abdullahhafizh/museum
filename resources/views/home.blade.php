@@ -14,7 +14,7 @@
 <div class="col-md-3 col-sm-6 col-xs-6">
     <div class="product product-single">
         <div class="product-thumb">
-            <a href="{{ url($product->category.'/'.$product->subcat.'/'.$product->id) }}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Lihat Lebih</a>
+            <a href="{{ url($product->category.'/'.$product->subcat.'/'.$product->id) }}" class="main-btn quick-view"><i class="fa fa-search-plus fa-fw"></i>Lihat</a>
             <img src="{{ url('img/product01.jpg') }}" alt="">
         </div>        
         <div class="product-body">

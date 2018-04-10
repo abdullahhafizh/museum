@@ -5,7 +5,10 @@
     <div class="order-summary clearfix">
         <div class="section-title">
             <h3 class="title">Lihat Pesanan</h3>
-        </div>            
+        </div>
+        @if(sizeof(Cart::content()) <= 0)
+        Kosong
+        @else
         <table class="shopping-cart-table table">
             <thead>
                 <tr>
@@ -55,6 +58,7 @@
         <div class="pull-right">
             <button class="primary-btn">Place Order</button>
         </div>
+        @endif
     </div>
 </div>
 @endsection
