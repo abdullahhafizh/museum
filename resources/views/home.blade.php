@@ -4,8 +4,7 @@
 <div class="col-md-12">
     <div class="section-title">
         <h2 class="title">{{ $title or 'Terbaru'}}</h2>
-    </div>
-    {{Cart::content()}}
+    </div>    
     @if(sizeof($products)<=0)
     kosong
     @endif
