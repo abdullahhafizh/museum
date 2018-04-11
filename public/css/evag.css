@@ -38,6 +38,10 @@ strong {
   color: #30323A;
 }
 
+strong.text-uppercase {
+  color: #fff;
+}
+
 ul, ol {
   margin: 0;
   padding: 0;
@@ -231,6 +235,10 @@ ul.list-links>li>h3.list-links-title>a.active {
   color: #DADADA;
 }
 
+header {
+  background-color: #172d47;
+}
+
 #header {
   padding-top: 15px;
   padding-bottom: 15px;
@@ -278,6 +286,7 @@ ul.list-links>li>h3.list-links-title>a.active {
 
 .header-search>form .search-input {  
   padding-right: 45px;
+  background-color: #fff;
 }
 
 .header-search>form .search-categories {
@@ -367,8 +376,7 @@ ul.list-links>li>h3.list-links-title>a.active {
 }
 
 #navigation {
-  /*background-color: #30323A;*/
-  background-color: #172d47;  
+  background-color: #30323A;
 }
 
 #navigation .container {
@@ -395,7 +403,7 @@ ul.list-links>li>h3.list-links-title>a.active {
 }
 
 .category-nav .category-list {
-  position: absolute;
+  position: block;
   width: 270px;
   background-color: #FFF;
   border-left: 1px solid #DADADA;
@@ -1405,8 +1413,15 @@ ul.list-links>li>h3.list-links-title>a.active {
   color: #F8694A;
 }
 
+footer {    
+    position: block;
+    left: 0;
+    bottom: 0;    
+    overflow: hidden;
+}
+
 .footer {
-  margin: 15px 0px;
+  margin: 15px 0px;  
 }
 
 .footer .footer-header {

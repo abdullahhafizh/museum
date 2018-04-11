@@ -75,7 +75,7 @@ class HomeController extends Controller
                 'category' => $request->input('category'),
                 'subcat' => $request->input('subcat'),
             ]
-        ]);        
+        ]);
         return back();
     }
 

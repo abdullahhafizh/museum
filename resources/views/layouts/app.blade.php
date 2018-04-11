@@ -37,12 +37,12 @@
                         <li class="header-account">
                             <a href="{{ route('profile') }}">
                                 <div class="header-btns-icon">
-                                    <i class="fa fa-user-o"></i>
+                                    <i class="fa fa-user-o" style="color: #30323A;"></i>
                                 </div>
                                 <strong class="text-uppercase">{{ Auth::user()->name }}</strong>
                             </a>
                             <br>
-                            <a href="{{ route('logout') }}" class="text-uppercase" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                            <a href="{{ route('logout') }}" class="text-uppercase" style="color: #fff;" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
@@ -52,12 +52,14 @@
                         <li class="header-cart dropdown default-dropdown">
                             <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <div class="header-btns-icon">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <span class="qty">{{Cart::content()->count()}}</span>
+                                    <i class="fa fa-shopping-cart" style="color: #30323A;"></i>
+                                    @if(Cart::count() >= 1)
+                                    <span class="qty">{{ Cart::count() }}</span>
+                                    @endif
                                 </div>
                                 <strong class="text-uppercase">Keranjang saya :</strong>
                                 <br>
-                                <span style="font-size: 14px;font-size: calc(0.64vw + 0.5vh);;">{{ Cart::count() }} item - Rp{{ Cart::subtotal() }}</span>
+                                <span style="color:#fff;font-size: 14px;font-size: calc(0.64vw + 0.5vh);;">{{Cart::content()->count()}} item - Rp{{ Cart::subtotal() }}</span>
                             </div>
                             @if(sizeof(Cart::content()) <= 0)
                             @else
@@ -100,42 +102,45 @@
     </header>
     <div id="navigation">
         <div class="container">
-            <div id="responsive-nav">
-                <div class="category-nav show-on-click">
-                    <span class="category-header">Kategori <i class="fa fa-list"></i></span>
-                    <ul class="category-list">
+            <div id="responsive-nav">                
+                <div class="menu-nav">
+                    <div class="category-nav hidden-sm hidden-xs">
+                        <span class="category-header hidden-sm hidden-xs">Kategori <i class="fa fa-list"></i></span>
+                    </div>
+                    <div class="category-nav hidden-lg hidden-md">
+                        <span class="category-header">Kategori <i class="fa fa-list"></i></span>
                         <?php
                         $categories = Category::all();
                         ?>
-                        @foreach($categories as $category)
-                        <li class="dropdown side-dropdown">
-                            <a class="dropdown-toggle {{ Request::segment(1) === $category->name ? 'active' : null }}" data-toggle="dropdown" aria-expanded="true">{{ $category->name }} <i class="fa fa-angle-right"></i></a>
-                            <div class="custom-menu">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <ul class="list-links">
-                                            <li>
-                                                <h3 class="list-links-title"><a class="{{ Request::segment(1) === $category->name ? 'active' : null }}" href="{{ url($category->name) }}">{{ $category->name }}</a></h3>
-                                            </li>
-                                            <?php
-                                            $sub_categories = \App\SubCat::where('category', '=', $category->code)->get();
-                                            ?>
-                                            @foreach($sub_categories as $sub_category)
-                                            <div class="col-md-4">
-                                                <ul class="list-links">
-                                                    <li class="{{ Request::segment(2) === $sub_category->name ? 'active' : null }}"><a href="{{ url($category->name.'/'.$sub_category->name) }}">{{ $sub_category->name }}</a></li>
-                                                </ul>
-                                            </div>
-                                            @endforeach
-                                        </ul>
+                        <ul class="category-list">                        
+                            @foreach($categories as $category)
+                            <li class="dropdown side-dropdown">
+                                <a class="dropdown-toggle {{ Request::segment(1) === $category->name ? 'active' : null }}" data-toggle="dropdown" aria-expanded="true">{{ $category->name }} <i class="fa fa-angle-right"></i></a>
+                                <div class="custom-menu">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <ul class="list-links">
+                                                <li>
+                                                    <h3 class="list-links-title"><a class="{{ Request::segment(1) === $category->name ? 'active' : null }}" href="{{ url($category->name) }}">{{ $category->name }}</a></h3>
+                                                </li>
+                                                <?php
+                                                $sub_categories = \App\SubCat::where('category', '=', $category->code)->get();
+                                                ?>
+                                                @foreach($sub_categories as $sub_category)
+                                                <div class="col-md-4">
+                                                    <ul class="list-links">
+                                                        <li class="{{ Request::segment(2) === $sub_category->name ? 'active' : null }}"><a href="{{ url($category->name.'/'.$sub_category->name) }}">{{ $sub_category->name }}</a></li>
+                                                    </ul>
+                                                </div>
+                                                @endforeach
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        @endforeach
-                    </ul>
-                </div>
-                <div class="menu-nav">
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
                     <span class="menu-header">Menu <i class="fa fa-bars"></i></span>
                     <ul class="menu-list">
                         <li><a class="{{ Request::segment(1) === null ? 'active' : null }}" href="{{ url('/') }}">Home</a></li>
@@ -153,8 +158,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div id="breadcrumb">
+    </div>    
+    <!-- <div id="breadcrumb">
         <div class="container">
             <ul class="breadcrumb">
                 <li class="{{ Request::segment(1) === null ? 'active' : null }}">Home</li>
@@ -172,64 +177,110 @@
                 @endif
             </ul>
         </div>
-    </div>
-    <div class="section">
+    </div> -->
+    <div id="home">
         <div class="container">
-            <div class="row">
-                @yield('content')
-            </div>
-        </div>
-    </div>
-    <footer id="footer" class="section section-grey">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="footer">
-                        <h3 class="footer-header">Informasi</h3>
-                        <ul class="list-links">
-                            <li><a href="#">Tentang Kami</a></li>
-                            <li><a href="#">Hubungi Kami</a></li>
-                            <li><a href="#">Kebijakan Pribadi</a></li>
-                            <li><a href="#">Syarat & Ketentuan</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="footer">
-                        <h3 class="footer-header">Akun Saya</h3>
-                        <ul class="list-links">
-                            <li><a class="{{ Request::segment(1) === 'profile' ? 'active' : null }}" href="{{ route('profile') }}" href="{{ route('profile') }}">Akun Saya</a></li>
-                            <li><a href="#">Riwayat Pesanan</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="clearfix visible-sm visible-xs"></div>
-                <div class="col-md-4">
-                    <div class="footer">
-                        <div class="footer-logo">
-                            <a class="logo" href="{{ url('/') }}">
-                                <img src="{{url('img/logo.png')}}" style="width: 155px;height: 70px;" alt="">
-                            </a>
+            <div class="category-nav hidden-sm hidden-xs">                
+                <ul class="category-list">                        
+                    @foreach($categories as $category)
+                    <li class="dropdown side-dropdown">
+                        <a class="dropdown-toggle {{ Request::segment(1) === $category->name ? 'active' : null }}" data-toggle="dropdown" aria-expanded="true">{{ $category->name }} <i class="fa fa-angle-right"></i></a>
+                        <div class="custom-menu">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul class="list-links">
+                                        <li>
+                                            <h3 class="list-links-title"><a class="{{ Request::segment(1) === $category->name ? 'active' : null }}" href="{{ url($category->name) }}">{{ $category->name }}</a></h3>
+                                        </li>
+                                        <?php
+                                        $sub_categories = \App\SubCat::where('category', '=', $category->code)->get();
+                                        ?>
+                                        @foreach($sub_categories as $sub_category)
+                                        <div class="col-md-4">
+                                            <ul class="list-links">
+                                                <li class="{{ Request::segment(2) === $sub_category->name ? 'active' : null }}"><a href="{{ url($category->name.'/'.$sub_category->name) }}">{{ $sub_category->name }}</a></li>
+                                            </ul>
+                                        </div>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        <p>Kontak: sales@evagconservation.co.id</p>
-                    </div>
-                </div>
+                    </li>
+                    @endforeach
+                </ul>
             </div>
-            <hr>
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2 text-center">
-                    <div class="footer-copyright">
-                        &copy; <script>document.write(new Date().getFullYear());</script> Evag Conservation All Right Reserved.
+            @if(Request::segment(1) === null)
+            <div id="home-slick">                    
+                <div class="banner banner-1">
+                    <img src="./img/banner03.jpg" alt="">
+                    <div class="banner-caption">
+                        <h1 class="white-color">Lorem ipsum dolor sit amet</h1>
+                        <button class="primary-btn">Shop Now</button>
+                    </div>
+                </div>                    
+            </div>
+            @endif
+            <div class="section">
+                <div class="container">
+                    <div class="row">
+                        @yield('content')
                     </div>
                 </div>
             </div>
         </div>
-    </footer>
-    <script src="{{asset('js/jquery.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('js/slick.min.js')}}"></script>
-    <script src="{{asset('js/nouislider.min.js')}}"></script>
-    <script src="{{asset('js/jquery.zoom.min.js')}}"></script>
-    <script src="{{asset('js/main.js')}}"></script>
+    </div>        
+</div>    
+<footer id="footer" class="section section-grey">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="footer">
+                    <h3 class="footer-header">Informasi</h3>
+                    <ul class="list-links">
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Hubungi Kami</a></li>
+                        <li><a href="#">Kebijakan Pribadi</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="footer">
+                    <h3 class="footer-header">Akun Saya</h3>
+                    <ul class="list-links">
+                        <li><a class="{{ Request::segment(1) === 'profile' ? 'active' : null }}" href="{{ route('profile') }}" href="{{ route('profile') }}">Akun Saya</a></li>
+                        <li><a href="#">Riwayat Pesanan</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clearfix visible-sm visible-xs"></div>
+            <div class="col-md-4">
+                <div class="footer">
+                    <div class="footer-logo">
+                        <a class="logo" href="{{ url('/') }}">
+                            <img src="{{url('img/logo.png')}}" style="width: 155px;height: 70px;" alt="">
+                        </a>
+                    </div>
+                    <p>Kontak: sales@evagconservation.co.id</p>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center">
+                <div class="footer-copyright">
+                    &copy; <script>document.write(new Date().getFullYear());</script> Evag Conservation All Right Reserved.
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="{{asset('js/jquery.min.js')}}"></script>
+<script src="{{asset('js/bootstrap.min.js')}}"></script>
+<script src="{{asset('js/slick.min.js')}}"></script>
+<script src="{{asset('js/nouislider.min.js')}}"></script>
+<script src="{{asset('js/jquery.zoom.min.js')}}"></script>
+<script src="{{asset('js/main.js')}}"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 @section('content')
 <form id="profile-form" class="clearfix" method="POST" action="{{ route('update') }}">
     @csrf
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-7 col-md-offset-1">
         <div class="section-title">
             <h3 class="title">{{ __('Akun Saya') }}</h3>
         </div>

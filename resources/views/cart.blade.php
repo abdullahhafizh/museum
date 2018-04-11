@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="col-md-12">
+<div class="col-md-7 col-md-offset-1">
     <div class="order-summary clearfix">
         <div class="section-title">
             <h3 class="title">Lihat Pesanan</h3>
