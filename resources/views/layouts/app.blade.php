@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Evag Conservation - Perlengkapan Konservasi Kualitas Museum</title>
     <link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
-    <link type="text/css" rel="stylesheet" href="{{asset('css/slick.css')}}" />
-    <link type="text/css" rel="stylesheet" href="{{asset('css/slick-theme.css')}}" />
-    <link type="text/css" rel="stylesheet" href="{{asset('css/nouislider.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('css/evag.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/slick.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/slick-theme.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/nouislider.min.css') }}" />    
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/evag.css') }}" />    
 </head>
 <body>
     <header>
@@ -48,7 +48,6 @@
                             </form>
                         </li>
                         @endauth
-                        
                         <li class="header-cart dropdown default-dropdown">
                             <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <div class="header-btns-icon">
@@ -91,7 +90,6 @@
                             </div>
                             @endif
                         </li>
-                        
                         <li class="nav-toggle">
                             <button class="nav-toggle-btn main-btn icon-btn"><i class="fa fa-bars"></i></button>
                         </li>
@@ -102,7 +100,7 @@
     </header>
     <div id="navigation">
         <div class="container">
-            <div id="responsive-nav">                
+            <div id="responsive-nav">
                 <div class="menu-nav">
                     <div class="category-nav hidden-sm hidden-xs">
                         <span class="category-header hidden-sm hidden-xs">Kategori <i class="fa fa-list"></i></span>
@@ -112,8 +110,14 @@
                         <?php
                         $categories = Category::all();
                         ?>
-                        <ul class="category-list">                        
+                        <ul class="category-list">
                             @foreach($categories as $category)
+                            <?php
+                            $sub_categories = \App\SubCat::where('category', '=', $category->code)->get();
+                            ?>
+                            @if(sizeof($sub_categories)<=0)
+                            <li><a class="{{ Request::segment(1) === $category->name ? 'active' : null }}" href="{{ url($category->slug) }}">{{ $category->name }}</a></li>
+                            @else
                             <li class="dropdown side-dropdown">
                                 <a class="dropdown-toggle {{ Request::segment(1) === $category->name ? 'active' : null }}" data-toggle="dropdown" aria-expanded="true">{{ $category->name }} <i class="fa fa-angle-right"></i></a>
                                 <div class="custom-menu">
@@ -121,15 +125,12 @@
                                         <div class="col-md-12">
                                             <ul class="list-links">
                                                 <li>
-                                                    <h3 class="list-links-title"><a class="{{ Request::segment(1) === $category->name ? 'active' : null }}" href="{{ url($category->name) }}">{{ $category->name }}</a></h3>
-                                                </li>
-                                                <?php
-                                                $sub_categories = \App\SubCat::where('category', '=', $category->code)->get();
-                                                ?>
+                                                    <h3 class="list-links-title"><a class="{{ Request::segment(1) === $category->name ? 'active' : null }}" href="{{ url($category->slug) }}">{{ $category->name }}</a></h3>
+                                                </li>                                                
                                                 @foreach($sub_categories as $sub_category)
                                                 <div class="col-md-4">
                                                     <ul class="list-links">
-                                                        <li class="{{ Request::segment(2) === $sub_category->name ? 'active' : null }}"><a href="{{ url($category->name.'/'.$sub_category->name) }}">{{ $sub_category->name }}</a></li>
+                                                        <li class="{{ Request::segment(2) === $sub_category->name ? 'active' : null }}"><a href="{{ url($category->slug.'/'.$sub_category->slug) }}">{{ $sub_category->name }}</a></li>
                                                     </ul>
                                                 </div>
                                                 @endforeach
@@ -138,6 +139,7 @@
                                     </div>
                                 </div>
                             </li>
+                            @endif
                             @endforeach
                         </ul>
                     </div>
@@ -159,30 +161,17 @@
             </div>
         </div>
     </div>    
-    <!-- <div id="breadcrumb">
-        <div class="container">
-            <ul class="breadcrumb">
-                <li class="{{ Request::segment(1) === null ? 'active' : null }}">Home</li>
-                @if(Request::segment(1) === null)
-                @else
-                <li class="{{ Request::segment(2) === null ? 'active' : null }}">{{ Request::segment(1) === 'cart' ? 'Keranjang Saya' : null }}{{ Request::segment(1) === 'profile' ? 'Akun Saya' : null }}
-                    @foreach($categories as $category)
-                    {{ Request::segment(1) === $category->name ? $category->name : null }}
-                    @endforeach
-                </li>
-                @if(Request::segment(2) === null)
-                @else
-
-                @endif
-                @endif
-            </ul>
-        </div>
-    </div> -->
     <div id="home">
         <div class="container">
-            <div class="category-nav hidden-sm hidden-xs">                
-                <ul class="category-list">                        
+            <div class="category-nav hidden-sm hidden-xs">
+                <ul class="category-list">
                     @foreach($categories as $category)
+                    <?php
+                    $sub_categories = \App\SubCat::where('category', '=', $category->code)->get();
+                    ?>
+                    @if(sizeof($sub_categories)<=0)
+                    <li><a class="{{ Request::segment(1) === $category->name ? 'active' : null }}" href="{{ url($category->slug) }}">{{ $category->name }}</a></li>
+                    @else
                     <li class="dropdown side-dropdown">
                         <a class="dropdown-toggle {{ Request::segment(1) === $category->name ? 'active' : null }}" data-toggle="dropdown" aria-expanded="true">{{ $category->name }} <i class="fa fa-angle-right"></i></a>
                         <div class="custom-menu">
@@ -190,15 +179,12 @@
                                 <div class="col-md-12">
                                     <ul class="list-links">
                                         <li>
-                                            <h3 class="list-links-title"><a class="{{ Request::segment(1) === $category->name ? 'active' : null }}" href="{{ url($category->name) }}">{{ $category->name }}</a></h3>
-                                        </li>
-                                        <?php
-                                        $sub_categories = \App\SubCat::where('category', '=', $category->code)->get();
-                                        ?>
+                                            <h3 class="list-links-title"><a class="{{ Request::segment(1) === $category->name ? 'active' : null }}" href="{{ url($category->slug) }}">{{ $category->name }}</a></h3>
+                                        </li>                                        
                                         @foreach($sub_categories as $sub_category)
                                         <div class="col-md-4">
                                             <ul class="list-links">
-                                                <li class="{{ Request::segment(2) === $sub_category->name ? 'active' : null }}"><a href="{{ url($category->name.'/'.$sub_category->name) }}">{{ $sub_category->name }}</a></li>
+                                                <li class="{{ Request::segment(2) === $sub_category->name ? 'active' : null }}"><a href="{{ url($category->slug.'/'.$sub_category->slug) }}">{{ $sub_category->name }}</a></li>
                                             </ul>
                                         </div>
                                         @endforeach
@@ -207,29 +193,74 @@
                             </div>
                         </div>
                     </li>
+                    @endif
                     @endforeach
                 </ul>
-            </div>
-            @if(Request::segment(1) === null)
-            <div id="home-slick">                    
-                <div class="banner banner-1">
-                    <img src="./img/banner03.jpg" alt="">
-                    <div class="banner-caption">
-                        <h1 class="white-color">Lorem ipsum dolor sit amet</h1>
-                        <button class="primary-btn">Shop Now</button>
+            </div>            
+            <!-- <div class="col-md-offset-3">
+                <ul class="breadcrumb">
+                    <li class="{{ Request::segment(1) === null ? 'active' : null }}">Home</li>
+                    @if(Request::segment(1) === null)
+                    @else
+                    <li class="{{ Request::segment(2) === null ? 'active' : null }}">{{ Request::segment(1) === 'login' ? 'Login' : null }}{{ Request::segment(1) === 'register' ? 'Register' : null }}{{ Request::segment(1) === 'cart' ? 'Keranjang Saya' : null }}{{ Request::segment(1) === 'profile' ? 'Akun Saya' : null }}
+                        @foreach($categories as $category)
+                        {{ Request::segment(1) === $category->name ? $category->name : null }}
+                        @endforeach
+                    </li>
+                    @if(Request::segment(2) === null)
+                    @else
+                    <li class="{{ Request::segment(3) === null ? 'active' : null }}">
+                        <?php
+                        $bsubcat = \App\Subcat::all();
+                        ?>
+                        @foreach($bsubcat as $subcat)
+                        {{ Request::segment(2) === $subcat->name ? $subcat->name : null }}
+                        @endforeach
+                    </li>
+                    @endif
+                    @endif
+                </ul>
+            </div> -->           
+            @if(Request::segment(1) === null)            
+            <div class="row">
+                <div class="col-md-offset-3">
+                    <div id="home-slick">
+                        <div class="banner banner-1">
+                            <img src="./img/banner03.jpg" alt="">
+                            <div class="banner-caption">
+                                <h1 class="white-color">Barang Bagus</h1>
+                                <button class="primary-btn">Shop Now</button>
+                            </div>
+                        </div>
+                        <div class="banner banner-1">
+                            <img src="./img/banner03.jpg" alt="">
+                            <div class="banner-caption">
+                                <h1 class="white-color">Barang Bagus</h1>
+                                <button class="primary-btn">Shop Now</button>
+                            </div>
+                        </div>
+                        <div class="banner banner-1">
+                            <img src="./img/banner03.jpg" alt="">
+                            <div class="banner-caption">
+                                <h1 class="white-color">Barang Bagus</h1>
+                                <button class="primary-btn">Shop Now</button>
+                            </div>
+                        </div>
                     </div>
-                </div>                    
+                </div>
             </div>
             @endif
             <div class="section">
                 <div class="container">
                     <div class="row">
-                        @yield('content')
-                    </div>
+                        <div class="col-md-offset-3">
+                            @yield('content')                    
+                        </div>               
+                    </div> 
                 </div>
             </div>
         </div>
-    </div>        
+    </div>
 </div>    
 <footer id="footer" class="section section-grey">
     <div class="container">
@@ -245,6 +276,7 @@
                     </ul>
                 </div>
             </div>
+            @auth
             <div class="col-md-4">
                 <div class="footer">
                     <h3 class="footer-header">Akun Saya</h3>
@@ -254,6 +286,7 @@
                     </ul>
                 </div>
             </div>
+            @endauth
             <div class="clearfix visible-sm visible-xs"></div>
             <div class="col-md-4">
                 <div class="footer">
@@ -282,5 +315,10 @@
 <script src="{{asset('js/nouislider.min.js')}}"></script>
 <script src="{{asset('js/jquery.zoom.min.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
+<script src="{{asset('js/jquery.matchHeight.js')}}"></script>
+<script type="text/javascript">
+    $(".same").matchHeight();
+</script>
+@yield('foot-content')
 </body>
 </html>

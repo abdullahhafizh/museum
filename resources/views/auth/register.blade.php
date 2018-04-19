@@ -3,7 +3,7 @@
 @section('content')
 <form id="register-form" class="clearfix" method="POST" action="{{ route('register') }}">
     @csrf
-    <div class="col-md-7 col-md-offset-1">
+    <div class="col-md-8 col-md-offset-2">
         <div class="section-title">
             <h3 class="title">{{ __('Register') }}</h3>
         </div>
@@ -92,7 +92,7 @@
             </select>
         </div>
         <div class="form-group col-md-6">
-            <input id="tgl_lahir" type="date" class="input" name="tgl_lahir" value="{{ old('tgl_lahir') }}" required>
+            <input id="tgl_lahir" placeholder="Tanggal Lahir" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="input" name="tgl_lahir" value="{{ old('tgl_lahir') }}" required>
         </div>
         <div class="form-group col-md-6">
             <input id="no_telp" type="number" class="input" name="no_telp" value="{{ old('no_telp') }}" placeholder="Nomor Telepon">            

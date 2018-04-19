@@ -1,95 +1,86 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+<head>
+    <title>Dependent select Dropdown box</title>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href=" https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+   <style>
+   #loader{
+   visibility:hidden;
+   }
+   </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-success">
+                    <div class="panel-heading"><h2>DEPENDENT SELECT BOX(Country & States)</h2></div>
 
-        <title>Laravel</title>
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form" method="POST" action="">
+                            {{ csrf_field() }}
+                            <div class="form-group-sm">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+                                <div class="col-md-6">
+                                    <select name="category" class="form-control">
+                                        <option value="">--Select category--</option>
+                                        @foreach ($categories as $category => $value)
+                                        <option value="{{ $category }}"> {{ $value }}</option>   
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select name="subcat" class="form-control">
+                                     <option>--State--</option>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+                                 </select>
+                             </div><div class="col-md-2"><span id="loader"><i class="fa fa-spinner fa-3x fa-spin"></i></span></div>
 
-            .full-height {
-                height: 100vh;
-            }
+                         </div>
+                     </form>
+                 </div>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+                 <div class="panel-footer">- By: [Your Name]</div>
+             </div>
+         </div>
+     </div>
+ </div>
+ <script src="{{ asset('js/app.js') }}"></script>
+ <script type="text/javascript">
+      $(document).ready(function() {
 
-            .position-ref {
-                position: relative;
-            }
+    $('select[name="category"]').on('change', function(){
+        var categoryId = $(this).val();
+        if(categoryId) {
+            $.ajax({
+                url: '/states/get/'+categoryId,
+                type:"GET",
+                dataType:"json",
+                beforeSend: function(){
+                    $('#loader').css("visibility", "visible");
+                },
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+                success:function(data) {
 
-            .content {
-                text-align: center;
-            }
+                    $('select[name="subcat"]').empty();
 
-            .title {
-                font-size: 84px;
-            }
+                    $.each(data, function(key, value){
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+                        $('select[name="subcat"]').append('<option value="'+ key +'">' + value + '</option>');
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
+                    });
+                },
+                complete: function(){
+                    $('#loader').css("visibility", "hidden");
+                }
+            });
+        } else {
+            $('select[name="subcat"]').empty();
+        }
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+    });
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
+});
+ </script>
+</body>
 </html>

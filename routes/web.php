@@ -13,6 +13,9 @@
 
 Auth::routes();
 
+Route::get('products/create', 'HomeController@states');
+Route::get('states/get/{id}', 'HomeController@getStates');
+
 Route::post('add', 'HomeController@add')->name('add');
 Route::post('edit', 'HomeController@edit')->name('edit');
 Route::post('remove', 'HomeController@remove')->name('remove');
@@ -21,6 +24,7 @@ Route::post('update', 'Auth\AuthController@update')->name('update');
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('cart', 'HomeController@cart')->name('cart');
+Route::get('checkout', 'HomeController@checkout')->name('checkout');
 Route::get('destroy', 'HomeController@destroy')->name('destroy');
 Route::get('profile', 'Auth\AuthController@profile')->name('profile');
 

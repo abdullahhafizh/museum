@@ -209,6 +209,7 @@ return [
         'Route' => Illuminate\Support\Facades\Route::class,
         'Schema' => Illuminate\Support\Facades\Schema::class,
         'Session' => Illuminate\Support\Facades\Session::class,
+        'Size' => \App\Size::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Storage' => Illuminate\Support\Facades\Storage::class,
         'SubCat' => \App\Subcat::class,

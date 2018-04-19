@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Product;
 use Cart;
 use Auth;
+use Category;
+use SubCat;
+use DB;
 
 class HomeController extends Controller
 {    
@@ -32,27 +35,32 @@ class HomeController extends Controller
 
     public function category($category)
     {
-        if (!Product::where('category', '=', $category)->exists()) {
+        if (!Category::where('slug', '=', $category)->exists()) {
             abort(404);
         }
-        $data['products'] = Product::where('category', $category)->get();
+        $code_category = Category::where('slug', '=', $category)->value('code');
+        $data['products'] = Product::where('category', '=', $code_category)->get();
         $data['title'] = $category;
         return view('home')->with($data);
     }
 
     public function sub_category($category, $sub_category)
     {
-        if (!Product::where('category', '=', $category)->exists() || !Product::where('subcat', '=', $sub_category)->exists()) {
+        $code_category = Category::where('slug', '=', $category)->value('code');
+        $id_subcat = SubCat::where('slug', '=', $sub_category)->value('id');
+        if (!Subcat::where('category', '=', $code_category)->exists() || !SubCat::where('slug', '=', $sub_category)->exists()) {
             abort(404);
         }
-        $data['products'] = Product::where('category', '=', $category, 'AND', 'subcat', '=', $sub_category)->get();
+        $data['products'] = Product::where('category', '=', $code_category)->where('subcat', '=', $id_subcat)->get();
         $data['title'] = $sub_category;
         return view('home')->with($data);
     }
 
     public function product($category, $sub_category, $id)
     {
-        if (!Product::where('category', '=', $category)->exists() || !Product::where('subcat', '=', $sub_category)->exists() || !Product::where('id', '=', $id)->exists()) {
+        $code_category = Category::where('slug', '=', $category)->value('code');
+        $id_subcat = SubCat::where('slug', '=', $sub_category)->value('id');
+        if (!Product::where('category', '=', $code_category)->exists() || !Product::where('subcat', '=', $id_subcat)->exists() || !Product::where('id', '=', $id)->exists()) {
             abort(404);
         }
         $data['product'] = Product::find($id);
@@ -62,6 +70,14 @@ class HomeController extends Controller
     public function cart()
     {
         return view('cart');
+    }
+
+    public function checkout()
+    {        
+        if (Cart::content()->count() <= 0) {
+            abort(404);
+        }
+        return view('checkout');
     }
 
     public function add(Request $request)
@@ -74,6 +90,7 @@ class HomeController extends Controller
             'options' => [
                 'category' => $request->input('category'),
                 'subcat' => $request->input('subcat'),
+                'size' => $request->input('size'),
             ]
         ]);
         return back();
@@ -98,5 +115,18 @@ class HomeController extends Controller
         Cart::destroy();
         return back();
     }    
+
+    public function states()
+    {
+        $categories = DB::table('categories')->pluck("name","id");
+        return view('welcome',compact('categories'));
+    }
+
+    public function getStates($id) {
+        $subcat = DB::table("sub_cats")->where("category",$id)->pluck("name","id");
+
+        return json_encode($subcat);
+
+    }
 
 }

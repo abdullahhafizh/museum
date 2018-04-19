@@ -3,7 +3,7 @@
 @section('content')
 <form id="login-form" class="clearfix" method="POST" action="{{ route('login') }}">
     @csrf
-    <div class="col-md-6 col-md-offset-1">
+    <div class="col-md-6 col-md-offset-3">
         <div class="section-title">
             <h3 class="title">{{ __('Login') }}</h3>
         </div>
